@@ -145,7 +145,7 @@ If you want to host the service locally, follow these steps:
 
 1. **Download Docker**: [Docker Desktop](https://www.docker.com/products/docker-desktop/).
 2. **Install Docker**: Follow the standard installation process for your system. Ensure Docker is running.
-3. **Download the ZIP**: Obtain the ZIP file from the [GitHub Releases](https://github.com/your-repository/releases).
+3. **Download the ZIP**: Obtain the ZIP file from the [GitHub Releases](https://github.com/ProtonDev-sys/bettermint-sockets/releases).
 4. **Extract and Run**:
    - Extract the ZIP file.
    - Run the `run.bat` file to install and start the Docker container.
