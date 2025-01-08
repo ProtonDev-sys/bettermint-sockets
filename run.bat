@@ -6,10 +6,31 @@ set PORT=7860
 :: Check if Docker is installed
 docker --version >nul 2>&1
 if errorlevel 1 (
-    echo Docker is not installed or not in PATH. Please install Docker first.
+    echo Docker is not installed.
+    echo Please download Docker Desktop manually from:
+    echo https://www.docker.com/products/docker-desktop
+    echo After installation, restart this script.
     pause
     exit /b
 )
+
+:: Ensure Docker Desktop is running
+echo Checking if Docker Desktop is running...
+tasklist /FI "IMAGENAME eq com.docker.backend.exe" 2>NUL | find /I "com.docker.backend.exe" >NUL
+if errorlevel 1 (
+    echo Docker Desktop is not running. Starting Docker Desktop...
+    start "" "C:\Program Files\Docker\Docker\Docker Desktop.exe"
+)
+
+:: Wait until Docker is fully operational
+echo Waiting for Docker to become operational...
+:WAIT_FOR_DOCKER
+docker info >nul 2>&1
+if errorlevel 1 (
+    timeout /t 2 >nul
+    goto WAIT_FOR_DOCKER
+)
+echo Docker is operational.
 
 :: Build the Docker image if it doesn't exist
 echo Checking if the Docker image "%IMAGE_NAME%" exists...
